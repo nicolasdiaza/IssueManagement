@@ -1,7 +1,7 @@
 {
   "name": "IssueManagement",
   "description": "Gets Email for Issues Management with RestAPI",
-  "main": "Flowchart.xaml",
+  "main": "IssueManagementChart.xaml",
   "dependencies": {
     "UiPath.Jira.Activities": "[2.4.0]",
     "UiPath.Mail.Activities": "[1.18.1]",
@@ -46,8 +46,8 @@
   "expressionLanguage": "VisualBasic",
   "entryPoints": [
     {
-      "filePath": "Flowchart.xaml",
-      "uniqueId": "9adf6f81-e187-4372-a89d-544451087550",
+      "filePath": "IssueManagementChart.xaml",
+      "uniqueId": "9bb832b0-8774-4c41-8340-d23813d16148",
       "input": [],
       "output": []
     }

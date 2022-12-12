@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,3221</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1222,2860</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>NewTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -113,7 +113,7 @@
       <AssemblyReference>System.CodeDom</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,3156" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,2795" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailSubject" />
@@ -124,8 +124,6 @@
       <Variable x:TypeArguments="x:String" Name="IssueKey" />
       <Variable x:TypeArguments="x:String" Name="RequestURL" />
       <Variable x:TypeArguments="s:String[]" Name="AttachmentsList" />
-      <Variable x:TypeArguments="x:Boolean" Name="Comparition" />
-      <Variable x:TypeArguments="x:Boolean" Name="Comparition2" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -133,31 +131,14 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="724,70" sap2010:WorkflowViewState.IdRef="Assign_15">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">[Comparition]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">[in_Email.Subject.Contains("[")]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="724,70" sap2010:WorkflowViewState.IdRef="Assign_16">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Boolean">[Comparition2]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Boolean">[in_Email.Subject.Contains("]")]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <If Condition="[Comparition = True And Comparition2 = True]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot;" sap:VirtualizedContainerService.HintSize="724,2814" sap2010:WorkflowViewState.IdRef="If_4">
+    <If Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot;" sap:VirtualizedContainerService.HintSize="724,2673" sap2010:WorkflowViewState.IdRef="If_4">
       <If.Then>
-        <Sequence DisplayName="Subject contains swuare brackets &quot;[&quot;" sap:VirtualizedContainerService.HintSize="642,2428" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence DisplayName="Subject contains swuare brackets &quot;[&quot;" sap:VirtualizedContainerService.HintSize="642,2287" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="580,101" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Its a new issue ticket&quot;]" />
           <ui:MultipleAssign DisplayName="New Email Decomposition" sap:VirtualizedContainerService.HintSize="580,203" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
@@ -335,7 +316,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[String.Format(&quot;We can not create the {0} issue with [{1}] priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[String.Format(&quot;We can not create the {0} issue with no priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
         </Sequence>
       </If.Else>
     </If>
