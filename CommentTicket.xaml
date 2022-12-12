@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,843</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1222,1470</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CommentTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -99,25 +99,22 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CommentTicket" sap:VirtualizedContainerService.HintSize="493,778" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CommentTicket" sap:VirtualizedContainerService.HintSize="544,1405" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailComment" />
       <Variable x:TypeArguments="x:String" Name="IssueKey" />
       <Variable x:TypeArguments="x:String" Name="RequestURL" />
-      <Variable x:TypeArguments="njl:JObject" Name="jsObj">
-        <Variable.Default>
-          <VisualBasicValue x:TypeArguments="njl:JObject" ExpressionText="New JObject()" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="njl:JObject" Default="[New JObject()]" Name="jsObj" />
       <Variable x:TypeArguments="x:String" Name="UpdateResponse" />
+      <Variable x:TypeArguments="x:String" Name="SearchResponse" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:MultipleAssign DisplayName="Comment Decomposition" sap:VirtualizedContainerService.HintSize="431,172" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Comment Decomposition" sap:VirtualizedContainerService.HintSize="482,172" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -147,27 +144,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <Assign DisplayName="Request URL creation" sap:VirtualizedContainerService.HintSize="431,70" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[RequestURL]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">["https://jiraco.softtek.cloud/rest/api/2/issue/"+IssueKey +"/comment"]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign DisplayName="Comment Json" sap:VirtualizedContainerService.HintSize="431,74" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="njl:JObject">[jsObj]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="njl:JObject" xml:space="preserve">[JObject.FromObject(
-New With {
-	Key. body = EmailComment +vbCrLf +"Commented by: " + in_Email.From.DisplayName
-	}
-)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[jsObj.ToString]" BodyFormat="application/json" DisplayName="New Comment Request" EnableSSLVerification="True" EndPoint="[RequestURL]" sap:VirtualizedContainerService.HintSize="431,79" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiracoCredentials.SecurePassword]" TimeoutMS="6000" Username="[in_JiracoCredentials.Username]">
+    <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="application/json" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="https://jiraco.softtek.cloud/rest/api/2/search?jql=project=GSTI+order+by+duedate&amp;fields=id,key" sap:VirtualizedContainerService.HintSize="482,79" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Result="[SearchResponse]" SecurePassword="[in_JiracoCredentials.SecurePassword]" TimeoutMS="6000" Username="[in_JiracoCredentials.Username]">
       <ui:HttpClient.Attachments>
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.Attachments>
@@ -184,6 +161,64 @@ New With {
         <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
       </ui:HttpClient.UrlSegments>
     </ui:HttpClient>
-    <ui:LogMessage DisplayName="Comment Log" sap:VirtualizedContainerService.HintSize="431,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;{0} on issue {1} processed.&quot;,in_SubjectStatus,IssueKey)]" />
+    <If Condition="[SearchResponse.Contains(IssueKey)]" sap:VirtualizedContainerService.HintSize="482,952" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="400,566" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Request URL creation" sap:VirtualizedContainerService.HintSize="338,70" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[RequestURL]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["https://jiraco.softtek.cloud/rest/api/2/issue/"+IssueKey +"/comment"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Comment Json" sap:VirtualizedContainerService.HintSize="338,74" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="njl:JObject">[jsObj]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="njl:JObject" xml:space="preserve">[JObject.FromObject(
+New With {
+	Key. body = EmailComment +vbCrLf +"Commented by: " + in_Email.From.DisplayName
+	}
+)]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[jsObj.ToString]" BodyFormat="application/json" DisplayName="New Comment Request" EnableSSLVerification="True" EndPoint="[RequestURL]" sap:VirtualizedContainerService.HintSize="338,79" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiracoCredentials.SecurePassword]" TimeoutMS="6000" Username="[in_JiracoCredentials.Username]">
+            <ui:HttpClient.Attachments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Attachments>
+            <ui:HttpClient.Cookies>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Cookies>
+            <ui:HttpClient.Headers>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Headers>
+            <ui:HttpClient.Parameters>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.Parameters>
+            <ui:HttpClient.UrlSegments>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+            </ui:HttpClient.UrlSegments>
+          </ui:HttpClient>
+          <ui:LogMessage DisplayName="Comment Log" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[String.Format(&quot;{0} on issue {1} processed.&quot;,in_SubjectStatus,IssueKey)]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="400,223" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Comment Log" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[String.Format(&quot;{0} on issue {1} was not completed, Issue Key provided does not match our records.&quot;,in_SubjectStatus,IssueKey)]" />
+        </Sequence>
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>
