@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1113,1031" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="745,711" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="136">
       <x:String>System.Activities</x:String>
@@ -216,7 +216,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Flowchart DisplayName="Issue Management" sap:VirtualizedContainerService.HintSize="634,966" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart DisplayName="Issue Management" sap:VirtualizedContainerService.HintSize="634,646" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="EmailList" />
       <Variable x:TypeArguments="ui:PasswordCredentials" Name="JiracoCredentials" />
@@ -232,7 +232,6 @@
         <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,107.5</av:PointCollection>
-        <x:Double x:Key="Height">920.432</x:Double>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
@@ -287,7 +286,7 @@
                   <av:Size x:Key="ShapeSize">200,118</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Iterates trough each mail in the email list." DisplayName="For Each - Email in Email List" sap:VirtualizedContainerService.HintSize="595,1756" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EmailList]">
+              <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Iterates trough each mail in the email list." DisplayName="For Each - Email in Email List" sap:VirtualizedContainerService.HintSize="200,118" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EmailList]">
                 <ui:ForEach.Body>
                   <ActivityAction x:TypeArguments="snm:MailMessage">
                     <ActivityAction.Argument>
@@ -355,15 +354,9 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Update Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="UpdateTicket.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">
-                                <VisualBasicValue x:TypeArguments="ui:PasswordCredentials" ExpressionText="JiracoCredentials" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
-                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
-                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
-                              </InArgument>
+                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">[JiracoCredentials]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -381,15 +374,9 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Comment Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="CommentTicket.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
-                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
-                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">
-                                <VisualBasicValue x:TypeArguments="ui:PasswordCredentials" ExpressionText="JiracoCredentials" />
-                              </InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
+                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">[JiracoCredentials]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                         </Sequence>
