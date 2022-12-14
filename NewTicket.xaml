@@ -1,13 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="NewTicket" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="NewTicket" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Email" Type="InArgument(snm:MailMessage)" />
-    <x:Property Name="in_JiracoCredentials" Type="InArgument(ui:PasswordCredentials)" />
     <x:Property Name="in_SubjectStatus" Type="InArgument(x:String)" />
+    <x:Property Name="in_JiraUser" Type="InArgument(x:String)" />
+    <x:Property Name="in_JiraPass" Type="InArgument(ss:SecureString)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1222,2860</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>776,2860</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>NewTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -215,7 +216,7 @@
 )]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[jsObj.ToString]" BodyFormat="application/json" DisplayName="New Issue Request" EnableSSLVerification="True" EndPoint="https://jiraco.softtek.cloud/rest/api/2/issue/" sap:VirtualizedContainerService.HintSize="436,79" sap2010:WorkflowViewState.IdRef="HttpClient_5" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiracoCredentials.SecurePassword]" TimeoutMS="6000" Username="[in_JiracoCredentials.Username]">
+                <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[jsObj.ToString]" BodyFormat="application/json" DisplayName="New Issue Request" EnableSSLVerification="True" EndPoint="https://jiraco.softtek.cloud/rest/api/2/issue/" sap:VirtualizedContainerService.HintSize="436,79" sap2010:WorkflowViewState.IdRef="HttpClient_5" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiraPass]" TimeoutMS="6000" Username="[in_JiraUser]">
                   <ui:HttpClient.Attachments>
                     <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
                   </ui:HttpClient.Attachments>
@@ -271,7 +272,7 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="application/json" DisplayName="Attachment to issue " EnableSSLVerification="True" EndPoint="[RequestURL]" sap:VirtualizedContainerService.HintSize="338,79" sap2010:WorkflowViewState.IdRef="HttpClient_6" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiracoCredentials.SecurePassword]" StatusCode="[StatusResponse]" TimeoutMS="6000" Username="[in_JiracoCredentials.Username]">
+                        <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="application/json" DisplayName="Attachment to issue " EnableSSLVerification="True" EndPoint="[RequestURL]" sap:VirtualizedContainerService.HintSize="338,79" sap2010:WorkflowViewState.IdRef="HttpClient_6" Method="POST" Result="[UpdateResponse]" SecurePassword="[in_JiraPass]" StatusCode="[StatusResponse]" TimeoutMS="6000" Username="[in_JiraUser]">
                           <ui:HttpClient.Attachments>
                             <InArgument x:TypeArguments="x:String" x:Key="file">[Attachment.ToString]</InArgument>
                           </ui:HttpClient.Attachments>

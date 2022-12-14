@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="745,711" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="708,711" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="136">
       <x:String>System.Activities</x:String>
@@ -219,12 +219,13 @@
   <Flowchart DisplayName="Issue Management" sap:VirtualizedContainerService.HintSize="634,646" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="EmailList" />
-      <Variable x:TypeArguments="ui:PasswordCredentials" Name="JiracoCredentials" />
       <Variable x:TypeArguments="x:String" Name="SubjectStatus" />
       <Variable x:TypeArguments="x:String" Name="RequestURL" />
       <Variable x:TypeArguments="s:String[]" Name="AttachmentsList" />
       <Variable x:TypeArguments="x:String" Name="SearchResponse" />
       <Variable x:TypeArguments="x:String" Name="IssueKey" />
+      <Variable x:TypeArguments="x:String" Name="JiraUser" />
+      <Variable x:TypeArguments="ss:SecureString" Name="JiraPass" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -248,8 +249,15 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Promps for Jiraco Credentials to use later." DisplayName="Get Jiraco Credentials" sap:VirtualizedContainerService.HintSize="200,118" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetCredentials.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="in_CredentialName">JiracoCredentials</InArgument>
-          <OutArgument x:TypeArguments="ui:PasswordCredentials" x:Key="out_JiracoCredentials">[JiracoCredentials]</OutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_CredentialName">
+            <Literal x:TypeArguments="x:String">JiracoCredentials</Literal>
+          </InArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="out_JiraUser">
+            <VisualBasicReference x:TypeArguments="x:String" ExpressionText="JiraUser" />
+          </OutArgument>
+          <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_JiraPass">
+            <VisualBasicReference x:TypeArguments="ss:SecureString" ExpressionText="JiraPass" />
+          </OutArgument>
         </ui:InvokeWorkflowFile.Arguments>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -339,9 +347,18 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="NewTicket.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
-                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">[JiracoCredentials]</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
+                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_JiraUser">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="JiraUser" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_JiraPass">
+                                <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="JiraPass" />
+                              </InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                         </Sequence>
@@ -354,9 +371,18 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Update Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="UpdateTicket.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">[JiracoCredentials]</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
+                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_JiraUser">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="JiraUser" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_JiraPass">
+                                <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="JiraPass" />
+                              </InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -374,9 +400,18 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Comment Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="CommentTicket.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
-                              <InArgument x:TypeArguments="ui:PasswordCredentials" x:Key="in_JiracoCredentials">[JiracoCredentials]</InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
+                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_JiraUser">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="JiraUser" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_JiraPass">
+                                <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="JiraPass" />
+                              </InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                         </Sequence>
