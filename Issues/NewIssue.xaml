@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>776,2860</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1299,3089</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>NewTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -114,7 +114,7 @@
       <AssemblyReference>System.CodeDom</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,2795" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Sequence to create an issue in Jira, obtain the issue key of the newly created issue and attach files.&#xA;" DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,3024" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailSubject" />
@@ -130,14 +130,21 @@
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot;" sap:VirtualizedContainerService.HintSize="724,2673" sap2010:WorkflowViewState.IdRef="If_4">
+    <If sap2010:Annotation.AnnotationText="Description:&#xA;Check if the square brackets (&quot;[ ]&quot;) exist in the subject of the current email." Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot;" sap:VirtualizedContainerService.HintSize="724,2845" sap2010:WorkflowViewState.IdRef="If_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Subject contains swuare brackets &quot;[&quot;" sap:VirtualizedContainerService.HintSize="642,2287" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence sap2010:Annotation.AnnotationText="" DisplayName="Subject contains square brackets &quot;[&quot;" sap:VirtualizedContainerService.HintSize="642,2417" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:MultipleAssign DisplayName="New Email Decomposition" sap:VirtualizedContainerService.HintSize="580,203" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
@@ -178,15 +185,20 @@
               </scg:List>
             </ui:MultipleAssign.AssignOperations>
           </ui:MultipleAssign>
-          <If Condition="[IssuePriority.ToLower = &quot;tarea&quot; Or IssuePriority.ToLower = &quot;incidente&quot; Or IssuePriority.ToLower = &quot;problema&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio&quot; Or IssuePriority.ToLower = &quot;cambiar&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio con aprobaciones&quot;]" DisplayName="Checks issue type and format" sap:VirtualizedContainerService.HintSize="580,1922" sap2010:WorkflowViewState.IdRef="If_5">
+          <If sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Check if the issue type is correct as well as the format of the subject." Condition="[IssuePriority.ToLower = &quot;tarea&quot; Or IssuePriority.ToLower = &quot;incidente&quot; Or IssuePriority.ToLower = &quot;problema&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio&quot; Or IssuePriority.ToLower = &quot;cambiar&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio con aprobaciones&quot;]" DisplayName="Checks issue type and format" sap:VirtualizedContainerService.HintSize="580,2021" sap2010:WorkflowViewState.IdRef="If_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Issue type recognized" sap:VirtualizedContainerService.HintSize="498,1536" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <Sequence sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;When the type of issue is recognized, we assign the corresponding variables and generate a Json file to create an issue in Jira with RestAPI." DisplayName="Issue type recognized" sap:VirtualizedContainerService.HintSize="498,1593" sap2010:WorkflowViewState.IdRef="Sequence_8">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save email attachments in new folder" ExcludeInlineAttachments="False" FolderPath="MailAttachments/" sap:VirtualizedContainerService.HintSize="436,97" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_3" Message="[in_Email]" OverwriteExisting="False" />
                 <Assign sap:VirtualizedContainerService.HintSize="436,70" sap2010:WorkflowViewState.IdRef="Assign_10">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[IssuePriority]</OutArgument>
@@ -249,6 +261,7 @@
                     <InArgument x:TypeArguments="x:String">["https://jiraco.softtek.cloud/rest/api/latest/issue/"+IssueKey +"/attachments"]</InArgument>
                   </Assign.Value>
                 </Assign>
+                <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save email attachments in new folder" ExcludeInlineAttachments="False" FolderPath="MailAttachments/" sap:VirtualizedContainerService.HintSize="436,97" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_3" Message="[in_Email]" OverwriteExisting="False" />
                 <Assign DisplayName="Creates array of attachments path" sap:VirtualizedContainerService.HintSize="436,70" sap2010:WorkflowViewState.IdRef="Assign_14">
                   <Assign.To>
                     <OutArgument x:TypeArguments="s:String[]">[AttachmentsList]</OutArgument>
@@ -294,30 +307,30 @@
                     </ActivityAction>
                   </ui:ForEach.Body>
                 </ui:ForEach>
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="436,101" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[String.Format(&quot;{0} issue {1} with [{2}] priority has been created correctly.&quot;,in_SubjectStatus.ToUpper,IssueKey,IssuePriority)]" />
+                <ui:LogMessage DisplayName="New Issue Created" sap:VirtualizedContainerService.HintSize="436,101" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[String.Format(&quot;{0} issue {1} with [{2}] priority has been created correctly.&quot;,in_SubjectStatus.ToUpper,IssueKey,IssuePriority)]" />
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap:VirtualizedContainerService.HintSize="400,223" sap2010:WorkflowViewState.IdRef="Sequence_16">
+              <Sequence DisplayName="Issue type not recognized" sap:VirtualizedContainerService.HintSize="400,223" sap2010:WorkflowViewState.IdRef="Sequence_16">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[String.Format(&quot;We can not create the {0} issue with [{1}] priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
+                <ui:LogMessage DisplayName="Issue Type does not match our records." sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Error" Message="[String.Format(&quot;We can not create the {0} issue with [{1}] priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
               </Sequence>
             </If.Else>
           </If>
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence sap:VirtualizedContainerService.HintSize="400,223" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence DisplayName="Subject does not contains square brackets (&quot;[ ]&quot;)" sap:VirtualizedContainerService.HintSize="400,223" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[String.Format(&quot;We can not create the {0} issue with no priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
+          <ui:LogMessage DisplayName="Issue priority not found in subject." sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[String.Format(&quot;We can not create the {0} issue with no priority.&quot;,in_SubjectStatus.ToUpper,IssuePriority)]" />
         </Sequence>
       </If.Else>
     </If>

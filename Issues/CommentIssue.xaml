@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>708,1978</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1299,2077</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CommentTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -100,7 +100,7 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CommentTicket" sap:VirtualizedContainerService.HintSize="688,1913" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CommentTicket" sap:VirtualizedContainerService.HintSize="688,2012" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailComment" />
@@ -115,9 +115,14 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot; and IssueKey" sap:VirtualizedContainerService.HintSize="626,1791" sap2010:WorkflowViewState.IdRef="If_2">
+    <If sap2010:Annotation.AnnotationText="Description:&#xA;Check if the square brackets (&quot;[ ]&quot;) exist in the subject of the current email." Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot; and IssueKey" sap:VirtualizedContainerService.HintSize="626,1890" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Square brackets does exist in subject" sap:VirtualizedContainerService.HintSize="544,1405" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence DisplayName="Square brackets does exist in subject" sap:VirtualizedContainerService.HintSize="544,1462" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -170,11 +175,12 @@
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.UrlSegments>
           </ui:HttpClient>
-          <If Condition="[SearchResponse.Contains(IssueKey)]" DisplayName="Checks if Issue Key exists" sap:VirtualizedContainerService.HintSize="482,952" sap2010:WorkflowViewState.IdRef="If_1">
+          <If sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;When the issue key is recognized, we assign the corresponding variables and generate a Json file to update an issue in Jira with RestAPI." Condition="[SearchResponse.Contains(IssueKey)]" DisplayName="Checks if Issue Key exists" sap:VirtualizedContainerService.HintSize="482,1009" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
@@ -231,7 +237,7 @@ New With {
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Comment Log" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[String.Format(&quot;{0} on issue {1} was not completed, Issue Key provided does not match our records.&quot;,in_SubjectStatus,IssueKey)]" />
+                <ui:LogMessage DisplayName="Comment Log" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Error" Message="[String.Format(&quot;{0} on issue {1} was not completed, Issue Key provided does not match our records.&quot;,in_SubjectStatus,IssueKey)]" />
               </Sequence>
             </If.Else>
           </If>
@@ -244,7 +250,7 @@ New With {
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Update Issue is not posible" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[String.Format(&quot;We can not {0} issue with no IssueKey.&quot;,in_SubjectStatus.ToUpperInvariant)]">
+          <ui:LogMessage DisplayName="Update Issue is not posible" sap:VirtualizedContainerService.HintSize="338,101" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[String.Format(&quot;We can not {0} issue with no IssueKey.&quot;,in_SubjectStatus.ToUpperInvariant)]">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>

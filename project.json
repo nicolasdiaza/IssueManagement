@@ -1,7 +1,7 @@
 {
   "name": "IssueManagement",
   "description": "Gets Email for Issues Management with RestAPI",
-  "main": "IssueManagementChart.xaml",
+  "main": "Issue Management.xaml",
   "dependencies": {
     "UiPath.Jira.Activities": "[2.4.0]",
     "UiPath.Mail.Activities": "[1.18.1]",
@@ -14,7 +14,7 @@
   "studioVersion": "22.10.3.0",
   "projectVersion": "1.0.0",
   "runtimeOptions": {
-    "exceptionHandlerWorkflow": "GlobalExceptionHandler.xaml",
+    "exceptionHandlerWorkflow": "GlobalHandler.xaml",
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
     "isPausable": true,
@@ -47,8 +47,8 @@
   "expressionLanguage": "VisualBasic",
   "entryPoints": [
     {
-      "filePath": "IssueManagementChart.xaml",
-      "uniqueId": "9bb832b0-8774-4c41-8340-d23813d16148",
+      "filePath": "Issue Management.xaml",
+      "uniqueId": "40d73c11-6f7d-4397-9081-5ddcf44b13e5",
       "input": [],
       "output": []
     }
