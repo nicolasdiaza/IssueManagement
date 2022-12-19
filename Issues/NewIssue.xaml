@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1299,3089</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1267,3089</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>NewTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -114,7 +114,7 @@
       <AssemblyReference>System.CodeDom</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Sequence to create an issue in Jira, obtain the issue key of the newly created issue and attach files.&#xA;" DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,3024" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap2010:Annotation.AnnotationText="Description:&#xA;Sequence to create an issue in Jira, obtain the issue key of the newly created issue and attach files.&#xA;" DisplayName="New Issue" sap:VirtualizedContainerService.HintSize="786,3024" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailSubject" />
@@ -185,14 +185,14 @@
               </scg:List>
             </ui:MultipleAssign.AssignOperations>
           </ui:MultipleAssign>
-          <If sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;Check if the issue type is correct as well as the format of the subject." Condition="[IssuePriority.ToLower = &quot;tarea&quot; Or IssuePriority.ToLower = &quot;incidente&quot; Or IssuePriority.ToLower = &quot;problema&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio&quot; Or IssuePriority.ToLower = &quot;cambiar&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio con aprobaciones&quot;]" DisplayName="Checks issue type and format" sap:VirtualizedContainerService.HintSize="580,2021" sap2010:WorkflowViewState.IdRef="If_5">
+          <If sap2010:Annotation.AnnotationText="Description:&#xA;Check if the issue type is correct as well as the format of the subject." Condition="[IssuePriority.ToLower = &quot;tarea&quot; Or IssuePriority.ToLower = &quot;incidente&quot; Or IssuePriority.ToLower = &quot;problema&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio&quot; Or IssuePriority.ToLower = &quot;cambiar&quot; Or IssuePriority.ToLower = &quot;solicitud de servicio con aprobaciones&quot;]" DisplayName="Checks issue type and format" sap:VirtualizedContainerService.HintSize="580,2021" sap2010:WorkflowViewState.IdRef="If_5">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;When the type of issue is recognized, we assign the corresponding variables and generate a Json file to create an issue in Jira with RestAPI." DisplayName="Issue type recognized" sap:VirtualizedContainerService.HintSize="498,1593" sap2010:WorkflowViewState.IdRef="Sequence_8">
+              <Sequence sap2010:Annotation.AnnotationText="Description:&#xA;When the type of issue is recognized, we assign the corresponding variables and generate a Json file to create an issue in Jira with RestAPI." DisplayName="Issue type recognized" sap:VirtualizedContainerService.HintSize="498,1593" sap2010:WorkflowViewState.IdRef="Sequence_8">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>

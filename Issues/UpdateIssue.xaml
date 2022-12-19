@@ -8,7 +8,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1299,2864</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1267,2932</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>UpdateTicket_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="37">
@@ -115,7 +115,7 @@
       <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="UpdateTicket" sap:VirtualizedContainerService.HintSize="786,2799" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="UpdateTicket" sap:VirtualizedContainerService.HintSize="786,2867" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmailFrom" />
       <Variable x:TypeArguments="x:String" Name="EmailSubject" />
@@ -134,7 +134,7 @@
         <x:Boolean x:Key="IsPinned">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If sap2010:Annotation.AnnotationText="Description:&#xA;Check if the square brackets (&quot;[ ]&quot;) exist in the subject of the current email." Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot; and IssueKey" sap:VirtualizedContainerService.HintSize="724,2677" sap2010:WorkflowViewState.IdRef="If_2">
+    <If sap2010:Annotation.AnnotationText="Description:&#xA;Check if the square brackets (&quot;[ ]&quot;) exist in the subject of the current email." Condition="[in_Email.Subject.Contains(&quot;[&quot;) And in_Email.Subject.Contains(&quot;]&quot;)]" DisplayName="Check for Square brackets &quot;[&quot; &quot;]&quot; and IssueKey" sap:VirtualizedContainerService.HintSize="724,2745" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsPinned">True</x:Boolean>
@@ -143,7 +143,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Square brackets does exist in subject" sap:VirtualizedContainerService.HintSize="642,2249" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <Sequence DisplayName="Square brackets does exist in subject" sap:VirtualizedContainerService.HintSize="642,2317" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -210,7 +210,7 @@
               <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
             </ui:HttpClient.UrlSegments>
           </ui:HttpClient>
-          <If sap2010:Annotation.AnnotationText="Description:&#xD;&#xA;When the issue key is recognized, we assign the corresponding variables and generate a Json file to update an issue in Jira with RestAPI." Condition="[SearchResponse.Contains(IssueKey)]" DisplayName="Checks if Issue Key exists" sap:VirtualizedContainerService.HintSize="580,1765" sap2010:WorkflowViewState.IdRef="If_1">
+          <If sap2010:Annotation.AnnotationText="Description:&#xA;When the issue key is recognized, we assign the corresponding variables and generate a Json file to update an issue in Jira with RestAPI." Condition="[SearchResponse.Contains(IssueKey)]" DisplayName="Checks if Issue Key exists" sap:VirtualizedContainerService.HintSize="580,1833" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -219,14 +219,13 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="498,1322" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence sap:VirtualizedContainerService.HintSize="498,1390" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save email attachments in new folder" ExcludeInlineAttachments="False" FolderPath="MailAttachments/" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_2" Message="[in_Email]" OverwriteExisting="True" />
                 <Assign DisplayName="Request URL for Updates" sap:VirtualizedContainerService.HintSize="436,70" sap2010:WorkflowViewState.IdRef="Assign_5">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[RequestURL]</OutArgument>
@@ -267,6 +266,7 @@
                     <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
                   </ui:HttpClient.UrlSegments>
                 </ui:HttpClient>
+                <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="Save email attachments in new folder" ExcludeInlineAttachments="False" FolderPath="MailAttachments/" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_2" Message="[in_Email]" OverwriteExisting="True" />
                 <Assign DisplayName="Request URL for attachments" sap:VirtualizedContainerService.HintSize="436,70" sap2010:WorkflowViewState.IdRef="Assign_7">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[RequestURL]</OutArgument>
@@ -283,13 +283,13 @@
                     <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("MailAttachments/")]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="436,435" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[AttachmentsList]">
+                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="436,463" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[AttachmentsList]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="x:String">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:String" Name="Attachment" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,302" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="400,330" sap2010:WorkflowViewState.IdRef="Sequence_5">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -313,7 +313,13 @@
                             <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
                           </ui:HttpClient.UrlSegments>
                         </ui:HttpClient>
-                        <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="338,61" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="[Attachment.ToString]" />
+                        <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="338,89" sap2010:WorkflowViewState.IdRef="DeleteFileX_2" Path="[Attachment.ToString]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:DeleteFileX>
                       </Sequence>
                     </ActivityAction>
                   </ui:ForEach.Body>
@@ -323,7 +329,13 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEach>
-                <ui:LogMessage DisplayName="New Ticket Log" sap:VirtualizedContainerService.HintSize="436,61" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[String.Format(&quot;{0} on issue {1} processed.&quot;,in_SubjectStatus, IssueKey)]" />
+                <ui:LogMessage DisplayName="New Ticket Log" sap:VirtualizedContainerService.HintSize="436,101" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[String.Format(&quot;{0} on issue {1} processed.&quot;,in_SubjectStatus, IssueKey)]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:LogMessage>
               </Sequence>
             </If.Then>
             <If.Else>

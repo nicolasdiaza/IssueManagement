@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1299,805" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Flowchart" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1267,805" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="136">
       <x:String>System.Activities</x:String>
@@ -268,7 +268,9 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Reads the first 50 unread mails from the Outlook account and stores them in a list. " DisplayName="Get emails" sap:VirtualizedContainerService.HintSize="200,148" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GetEmails.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <OutArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="out_MailMessages">[EmailList]</OutArgument>
+              <OutArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="out_MailMessages">
+                <VisualBasicReference x:TypeArguments="scg:List(snm:MailMessage)" ExpressionText="EmailList" />
+              </OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -285,7 +287,7 @@
                   <av:Size x:Key="ShapeSize">200,208</av:Size>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Reads each mail from the list to subtract the information related to the issue:&#xA;- Sender&#xA;- Subject&#xA;- Message&#xA;- Issue Type&#xA;- Issue key" DisplayName="For each email in the list" sap:VirtualizedContainerService.HintSize="200,208" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EmailList]">
+              <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Description:&#xA;Reads each mail from the list to subtract the information related to the issue:&#xA;- Sender&#xA;- Subject&#xA;- Message&#xA;- Issue Type&#xA;- Issue key" DisplayName="For each email in the list" sap:VirtualizedContainerService.HintSize="595,2029" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[EmailList]">
                 <ui:ForEach.Body>
                   <ActivityAction x:TypeArguments="snm:MailMessage">
                     <ActivityAction.Argument>
@@ -385,10 +387,18 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Comment Issue" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Issues\CommentIssue.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">[Email]</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">[SubjectStatus]</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_JiraUser">[JiraUser]</InArgument>
-                              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_JiraPass">[JiraPass]</InArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="in_Email">
+                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="Email" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_SubjectStatus">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="SubjectStatus" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_JiraUser">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="JiraUser" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="ss:SecureString" x:Key="in_JiraPass">
+                                <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="JiraPass" />
+                              </InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                         </Sequence>
